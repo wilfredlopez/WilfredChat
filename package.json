@@ -1,0 +1,14 @@
+{
+  "name": "wilfred",
+  "version": "1.0.0",
+  "description": "Wilfred Lopez Site",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Wilfred Lopez",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
