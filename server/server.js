@@ -24,35 +24,40 @@ server.listen(process.env.PORT || 3000, () =>{
 
 //helps cominication // listen and emitting events
 io.on('connection', (socket) =>{
-    console.log('new User connection');
+   // console.log('new User connection');
 
     //socket represents the browser connected. io represents the server
     socket.on('disconnect', () =>{
-        console.log('disconected from server');
+        console.log('disconected from server'); //this will  happen when a browser gets disconected
     });
 
-    //this is to emit an event
-    socket.emit('newEmail',{
-        from:"Wilfred@example.com",
-        text:"hey, Whats Up?",
-        createdAt: 123
-    });
-
-    //this is to Listen to en evernt
-    socket.on('createEmail', (newEmail) =>{
-        console.log("new Email", newEmail);
-    });
-
+    /*
     //emit event
     socket.emit('newMessage', {
         from:"Wilfred",
         message:"this is my message",
         createdAt: 123123
     });
+    */
 
     //listen to event
     socket.on('createMessage', (msg) =>{
         console.log('message from brower received: ', msg);
+        
+    //greeting user
+    socket.emit('newMessage', {
+        from: 'admin',
+        message: "Welcome to the App",
+        createdAt: new Date().getTime()
+    });
+
+    socket.broadcast.emit('newMessage',{
+        from: 'admin',
+        message: 'new user Joined',
+        createdAt: new Date().getTime()
+    });
+    
+    
     });
 });//END CONNECTION
 
