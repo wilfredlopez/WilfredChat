@@ -33,4 +33,14 @@ socket.on('createMessage', (msg) =>{
             message: msg.message,
             createdAt: new Date().getTime()
         });
+
+
+        
 });
+
+
+
+    //socket represents the browser connected. io represents the server
+    socket.on('disconnect', () =>{
+        console.log('disconected from server'); //this will  happen when a browser gets disconected
+    });

@@ -11,7 +11,7 @@ socket.on('connect', () =>{
 
     socket.emit('createMessage', {
         from: "Wilfred-chrome",
-        message:"Im sending from browser"
+        text:"Im sending from browser"
     });
 
 });
