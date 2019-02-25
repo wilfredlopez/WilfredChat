@@ -3,16 +3,28 @@ var socket = io();
 socket.on('connect', () =>{
      console.log('connected to server');
 
-     //EMITING EVENT
-    socket.emit('createEmail',{
-        to:"wilfred@example.com",
-        text:"hi, this is my email"
+    
+
+    //handling event with query | getting data form Form
+    $(document).ready(function(){
+
+        var $form = $('#message-form');
+    
+        $form.on('submit', function(e){
+            e.preventDefault();
+    
+            socket.emit('createMessage',{
+                from: 'user',
+                text: $('[name=message]').val()
+            }, function(){
+    
+            });
+        });
+    
+    
     });
 
-    socket.emit('createMessage', {
-        from: "Wilfred-chrome",
-        text:"Im sending from browser"
-    });
+
 
 });
 
@@ -21,11 +33,18 @@ socket.on('disconnect', ()=> {
 });
 
 
-//creating an event listener. i give the name e.g. newEmail
-socket.on('newEmail', function(email){
-    console.log('new Email',email);
+//creating an event listener.
+socket.on('newMessage', function(message){
+    console.log('New Message: ', message);
+    
+    var li = $('<li></li>');
+    li.text(`${message.from}: ${message.text}`);
+
+    $('.messages').append(li);
 });
 
-socket.on('newMessage', function(msg){
-    console.log('New Message: ', msg);
-});
+
+
+
+
+
