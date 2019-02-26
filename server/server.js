@@ -10,13 +10,31 @@ var app = express();
 var server = http.createServer(app);
 var io = socketIO(server);
 
+
+//handlebars
+var hbs = require('hbs');
+
+
+//CREATING PUBLIC/STATIC FOLDER AND PARTIAL FOLDERS
+hbs.registerPartials(__dirname + './../views/partials');
+app.set('view engine', 'hbs');
+
+
+
 // to use public folder
 app.use(express.static(publicPath));
 
 //INDEX PAGE
 app.get('/', (req, res) =>{
-    res.render('/index.html');
+    res.render('/index.hbs');
 });
+
+app.get('/about', (req, res) =>{
+    res.render('about.hbs',{
+        pageTitle: 'About | Chat App',
+    }); //using hbs package
+});
+
 
 //PORT CONFIG
 server.listen(process.env.PORT || 3000, () =>{
@@ -39,7 +57,7 @@ io.on('connection', (socket) =>{
     });
 
     socket.on('createLocationMessage', (coords) =>{
-        io.emit('newMessage', generateMessage('Location:', `Latitude: ${coords.latitude}, Longitude: ${coords.longitude}`));
+        io.emit('newMessage', generateMessage('Location', `Latitude: ${coords.latitude}, Longitude: ${coords.longitude}`));
     });
 
 

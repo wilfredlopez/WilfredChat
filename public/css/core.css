@@ -1,17 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Catamaran');
+
+*{
+    font-family: 'Catamaran', sans-serif;
+}
+
+body{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+header{
+    background-color:#2b3131;
+    height: 50px;
+    position: relative;
+    border: .5px solid black;
+    box-shadow: 1px #f6f6f6;
+}
+main{
+    margin: 0 25px;
+
+}
+
 nav ul li{
     display: inline;
     padding: 8px;
-    border: .5px solid black;
+    border: .5px solid #b4b4b4;
     box-shadow: 1px #f6f6f6;
+    background-color:#0062b2;
 }
 
 nav ul > a{
     text-decoration: none;
-    color: blue;
+    color:#ffffff;
 }
 
 nav ul li:hover{
-    background-color: pink;
+    background-color: rgba(41, 83, 118, 0.49);
 
 }
 
@@ -44,4 +70,9 @@ article li:last-child{
 
 footer{
     text-align: center;
+    display: block;
+    background-color: lightgrey;
+    height: 50px;
+    padding: 5px  0;
+    margin-top: 10px;
 }
