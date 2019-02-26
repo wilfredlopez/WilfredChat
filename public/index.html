@@ -5,30 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home | Wilfred Lopez</title>
+ <link rel="stylesheet" href="css/core.css">
 </head>
 <body>
 <div class="container">
     <header>
         <nav class="nav">
             <ul style="list-style:none">
-                <a href="/"><li>Home</li></a>
-                <a href="/chat"><li>Chat</li></a>
+                <a href="/"><li>Chat</li></a>
+                <a href="/about"><li>About</li></a>
             </ul>
         </nav>
     </header>
     <main>
     <h1>Welcome to the Chat App</h1>
-        <section>
-            <p>Messages</p>
+        <section class="chat-section">
+            <h2>Chat</h2>
+            <article class="message-article">
             <ol class="messages"></ol>
+            </article>
 
         </section>
 
 
         <form id="message-form">
-            <input name="message" type="text" placeholder="type message here"/>
+            <input name="message" type="text" value="" placeholder="type message here" class="value">
             <button>Send</button>
         </form>
+
+        <br>
+    <article>
+        <button id="send-location" >Send Location</button>
+    </article>
 
 
 </main><!--End Main-->

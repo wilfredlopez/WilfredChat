@@ -37,6 +37,12 @@ io.on('connection', (socket) =>{
         io.emit('newMessage', generateMessage(message.from,message.text));
         callback('from server');
     });
+
+    socket.on('createLocationMessage', (coords) =>{
+        io.emit('newMessage', generateMessage('Location:', `Latitude: ${coords.latitude}, Longitude: ${coords.longitude}`));
+    });
+
+
 });//END CONNECTION
 
 
