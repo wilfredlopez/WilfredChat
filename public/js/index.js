@@ -7,6 +7,13 @@ socket.on('connect', () =>{
     //handling event with query | getting data form Form
     $(document).ready(function(){
 
+            //scroll function.
+            
+
+
+
+
+
         var $form = $('#message-form');
 
         $form.on('submit', function(e){
@@ -19,6 +26,9 @@ socket.on('connect', () =>{
             });
 
             $('[name=message]').val("");
+           
+
+        
         });
     
     var $locationButton = $('#send-location');
@@ -27,13 +37,20 @@ socket.on('connect', () =>{
         if (!navigator.geolocation){
             return alert('Geolocation not supported by your browser');
         }
+
+        $locationButton.attr('disabled', 'disabled').text('Sending ...');
+
         navigator.geolocation.getCurrentPosition(function(position){
             console.log(position);
+
+            $locationButton.removeAttr('disabled').text('Send Location');
+
             socket.emit('createLocationMessage',{
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude
             });
         }, function(){
+            $locationButton.attr('disabled', 'disabled');
             alert('unable to fech location');
         });
 
@@ -41,7 +58,7 @@ socket.on('connect', () =>{
     });
 
     socket.on('newLocationMessage', function(message){
-        var li = $('<li></li>');
+        var li = $('<li aria-selected="true" role="tab" tabindex="0"></li>');
         var a = $('<a target="_blank">My Current Location</a>');
     
         li.text(`${message.from}: `);
@@ -49,6 +66,8 @@ socket.on('connect', () =>{
         li.append(a);
 
         $('.messages').append(li);
+        li.focus();
+        $('.value').focus();
     });
     
 
@@ -69,10 +88,13 @@ socket.on('disconnect', ()=> {
 socket.on('newMessage', function(message){
     console.log('New Message: ', message);
     
-    var li = $('<li></li>');
+    var li = $('<li aria-selected="true" role="tab" tabindex="0"></li>');
     li.text(`${message.from}: ${message.text}`);
 
     $('.messages').append(li);
+    li.focus();
+    $('.value').focus();
+
 });
 
 

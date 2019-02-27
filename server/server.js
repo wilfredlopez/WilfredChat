@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-const publicPath = path.join(__dirname, '../public'); //to use public path
+const publicPath = path.join(__dirname, './../public'); //to use public path
 const {generateMessage, generateLocationMessage} = require('./utils/message');
 
 //setting Web Sockets
@@ -25,15 +25,21 @@ app.set('view engine', 'hbs');
 app.use(express.static(publicPath));
 
 //INDEX PAGE
-app.get('/', (req, res) =>{
-    res.render('/index.hbs');
-});
+
+
 
 app.get('/about', (req, res) =>{
     res.render('about.hbs',{
         pageTitle: 'About | Chat App',
     }); //using hbs package
 });
+
+app.get('/', (req, res) =>{
+    res.render('home.hbs',{
+        pageTitle: 'Home | Chat App',
+    }); //using hbs package
+});
+
 
 
 //PORT CONFIG

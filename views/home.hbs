@@ -6,27 +6,31 @@
 <body>
 <div class="container">
     {{> header }}
-<main>
-    <h1>Chat</h1>
-    <div class="sidebar">
-        <h2>People</h2>
+
+       <div class="sidebar">
+           <div class="sidehead"><h2>People</h2></div>
+        
         <div class="users"></div>
     </div>
 
-
+<main>
+    <h1>Chat</h1>
         <section class="chat-section">
             <article class="message-article">
             <ol class="messages"></ol>
             </article>
-        </section>
+        <div class="chat-footer">
         <form id="message-form">
-            <input name="message" type="text" value="" placeholder="type message here" class="value">
+            <input name="message" type="text" value="" placeholder="type message here" class="value" autofocus autocomplete="off">
             <button>Send</button>
-        </form>
-
+            
+        </form><button id="send-location" >Send Location</button>
+        
+        </div>
+</section>
         <br>
     <article>
-        <button id="send-location" >Send Location</button>
+        
     </article>
 
 
