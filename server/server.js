@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
 const publicPath = path.join(__dirname, '../public'); //to use public path
-const {generateMessage} = require('./utils/message');
+const {generateMessage, generateLocationMessage} = require('./utils/message');
 
 //setting Web Sockets
 const socketIO = require('socket.io');
@@ -57,7 +57,7 @@ io.on('connection', (socket) =>{
     });
 
     socket.on('createLocationMessage', (coords) =>{
-        io.emit('newMessage', generateMessage('Location', `Latitude: ${coords.latitude}, Longitude: ${coords.longitude}`));
+        io.emit('newLocationMessage', generateLocationMessage('Location', coords.latitude, coords.longitude));
     });
 
 

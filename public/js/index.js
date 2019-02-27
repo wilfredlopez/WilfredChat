@@ -1,4 +1,3 @@
-
 var socket = io();
 socket.on('connect', () =>{
      console.log('connected to server');
@@ -9,7 +8,7 @@ socket.on('connect', () =>{
     $(document).ready(function(){
 
         var $form = $('#message-form');
-    
+
         $form.on('submit', function(e){
             e.preventDefault();
             socket.emit('createMessage',{
@@ -41,7 +40,21 @@ socket.on('connect', () =>{
 
     });
 
+    socket.on('newLocationMessage', function(message){
+        var li = $('<li></li>');
+        var a = $('<a target="_blank">My Current Location</a>');
+    
+        li.text(`${message.from}: `);
+        a.attr('href', message.url);
+        li.append(a);
+
+        $('.messages').append(li);
     });
+    
+
+
+
+    }); //END DOCUMENT.READY
 
 
 
