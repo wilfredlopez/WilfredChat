@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const publicPath = path.join(__dirname, './../public'); //to use public path
 const {generateMessage, generateLocationMessage} = require('./utils/message');
-const moment = require('moment');
+const moment = require('moment'); //to handle time forma and display
 
 //setting Web Sockets
 const socketIO = require('socket.io');

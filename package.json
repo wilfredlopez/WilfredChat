@@ -7,9 +7,6 @@
     "start": "node server/server.js",
     "test": "test"
   },
-  "engine": {
-    "node": "11.9.0"
-  },
   "author": "Wilfred Lopez",
   "license": "ISC",
   "dependencies": {
