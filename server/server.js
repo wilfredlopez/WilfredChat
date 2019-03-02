@@ -58,7 +58,7 @@ io.on('connection', (socket) =>{
 
     
     //greeting user
-   //socket.emit('newMessage', generateMessage('Admin','Welcome to the Chat',tiempo));
+   socket.emit('newMessage', generateMessage('Admin','Welcome to the Chat',tiempo));
 
    hbs.registerHelper('from',() =>{
     return 'Admin'
@@ -78,13 +78,11 @@ hbs.registerHelper('createdAt',() =>{
     //listen to event
     socket.on('createMessage', (message, callback) =>{
         io.emit('newMessage', generateMessage(message.from,message.text,tiempo));
-
-
         callback('from server');
     });
 
     socket.on('createLocationMessage', (coords) =>{
-        io.emit('newLocationMessage', generateLocationMessage('Location', coords.latitude, coords.longitude));
+        io.emit('newLocationMessage', generateLocationMessage('User', coords.latitude, coords.longitude, tiempo));
     });
 
 

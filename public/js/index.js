@@ -1,3 +1,22 @@
+function scrollToBotton (){
+    //selectors
+    var messages = $('.messages');
+    var newMessage = $('article li:last-child');
+    //heights
+    var clientHeight = messages.prop('clientHeight');
+    var scrollTop = messages.prop('scrollTop');
+    var scrollHeight = messages.prop('scrollHeight');
+    var newMessageHeight = newMessage.innerHeight();
+    var lastMessageHeight = newMessage.prev().innerHeight();
+    
+    if(clientHeight + scrollTop + newMessageHeight + lastMessageHeight >= scrollHeight){
+        messages.scrollTop(scrollHeight);
+    }else{
+        console.log('should NOT scroll');
+    }
+};
+
+
 var socket = io();
 socket.on('connect', () =>{
      console.log('connected to server');
@@ -19,7 +38,7 @@ socket.on('connect', () =>{
         $form.on('submit', function(e){
             e.preventDefault();
             socket.emit('createMessage',{
-                from: 'user',
+                from: 'User',
                 text: $('[name=message]').val()
             }, function(){
     
@@ -58,6 +77,35 @@ socket.on('connect', () =>{
     });
 
     socket.on('newLocationMessage', function(message){
+            //removing aria-selected to old li elements
+    var listas = $('.messages li');
+    listas.removeAttr('aria-selected');
+
+
+    var li = $('<li aria-selected="true" role="tab" tabindex="0" class="from"></li>');
+    var a = $('<a target="_blank">My Current Location</a>');
+    a.attr('href', message.url);
+    
+    var messagediv = $('<div class="message"></div>');
+    var tiempo = $('<span class="tiempo"></span>');
+    var msgfrom = $('<span class="msgfrom"></span>');
+
+   messagediv.append(a);
+
+    tiempo.text(message.createdAt);
+    msgfrom.text(`${message.from} `);
+
+    li.append(msgfrom);
+    li.append(tiempo);
+    li.append(messagediv);
+
+    $('.messages').append(li);
+   // li.focus();
+   scrollToBotton();
+    $('.value').focus();
+
+
+        /*
         var li = $('<li aria-selected="true" role="tab" tabindex="0"></li>');
         var a = $('<a target="_blank">My Current Location</a>');
     
@@ -68,6 +116,7 @@ socket.on('connect', () =>{
         $('.messages').append(li);
         li.focus();
         $('.value').focus();
+        */
     });
     
 
@@ -86,28 +135,30 @@ socket.on('disconnect', ()=> {
 
 //creating an event listener.
 socket.on('newMessage', function(message){
-    //MUSTAGEJS WAY
-    var template = $('#message-template').html();
-    var html = Mustache.render(template,{
-        text: message.text,
-        from: message.from,
-        createdAt : message.createdAt
-    });
-    
-    $('.messages').append(html);
 
-   /*           //OLD WAY TO DO IT
+    //removing aria-selected to old li elements
+    var listas = $('.messages li');
+    listas.removeAttr('aria-selected');
+
+
     var li = $('<li aria-selected="true" role="tab" tabindex="0" class="from"></li>');
-    var span = $('<span class="message"></span>');
-    span.text(`${message.text}`);
-    li.text(`${message.createdAt} ${message.from}: `);
+    var messagediv = $('<div class="message"></div>');
+    var tiempo = $('<span class="tiempo"></span>');
+    var msgfrom = $('<span class="msgfrom"></span>');
 
-    li.append(span);
+    messagediv.text(message.text);
+    tiempo.text(message.createdAt);
+    msgfrom.text(`${message.from} `);
+
+   li.append(msgfrom);
+    li.append(tiempo);
+    li.append(messagediv);
 
     $('.messages').append(li);
-    li.focus();
-    $('.value').focus();
-*/
+    //li.focus();
+    scrollToBotton();
+    $('.value').focus(); 
+
 });
 
 

@@ -8,11 +8,11 @@ var generateMessage = (from, text, createdAt) =>{
 };
 
 
-var generateLocationMessage = (from, long, lat) => {
+var generateLocationMessage = (from, long, lat, createdAt) => {
         return {
             from: from,
             url: `https://www.google.com/maps?=${long},${lat}`,
-            createdAt: new Date().getTime()
+            createdAt
         };
 };
 

@@ -24,6 +24,7 @@ body{
     width: 100%;
     margin: 0;
     padding: 0;
+    min-width: 324px;
 }
 
 
@@ -63,10 +64,27 @@ header{
     font-weight: bolder;
 }
 main{
-    margin: 50px 10% 9px 25%;
+    /* margin: 45px 8% 7px 23%; */
     padding-top: 20px;
     display: block;
+    padding: 2% 2%;
+}
 
+main h1{
+    margin-top: 15%;
+}
+
+@media only screen and (min-width: 500px) {
+        main h1{
+            margin-top: 12%;
+        }
+  }
+
+
+  @media only screen and (min-width: 700px) {
+    main h1{
+        margin-top: 7%;
+    }
 }
 
 nav ul li{
@@ -88,9 +106,6 @@ nav ul li:hover{
 
 }
 
-.from{
-    font-style: italic;
-}
 
 ol{
     list-style: none;
@@ -163,4 +178,13 @@ footer{
 .message-article h4 {
     display: inline;
     font-weight: bolder;
+}
+
+article li:last-child span.msgfrom {
+    color: black;
+    font-weight: bold;
+}
+
+.tiempo{
+   font-style: italic; 
 }
