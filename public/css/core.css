@@ -154,3 +154,13 @@ footer{
     bottom: 0;
     width: 100%;
 }
+
+.message-article span {
+    display: inline;
+    color: lightslategray;
+}
+
+.message-article h4 {
+    display: inline;
+    font-weight: bolder;
+}

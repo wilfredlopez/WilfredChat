@@ -86,9 +86,17 @@ socket.on('disconnect', ()=> {
 
 //creating an event listener.
 socket.on('newMessage', function(message){
-    console.log('New Message: ', message);
+    //MUSTAGEJS WAY
+    var template = $('#message-template').html();
+    var html = Mustache.render(template,{
+        text: message.text,
+        from: message.from,
+        createdAt : message.createdAt
+    });
     
-   
+    $('.messages').append(html);
+
+   /*           //OLD WAY TO DO IT
     var li = $('<li aria-selected="true" role="tab" tabindex="0" class="from"></li>');
     var span = $('<span class="message"></span>');
     span.text(`${message.text}`);
@@ -99,7 +107,7 @@ socket.on('newMessage', function(message){
     $('.messages').append(li);
     li.focus();
     $('.value').focus();
-
+*/
 });
 
 
