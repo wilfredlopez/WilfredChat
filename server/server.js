@@ -3,6 +3,8 @@ const express = require('express');
 const publicPath = path.join(__dirname, './../public'); //to use public path
 const {generateMessage, generateLocationMessage} = require('./utils/message');
 const moment = require('moment'); //to handle time forma and display
+//handlebars
+var hbs = require('hbs');
 
 //setting Web Sockets
 const socketIO = require('socket.io');
@@ -11,19 +13,17 @@ var app = express();
 var server = http.createServer(app);
 var io = socketIO(server);
 
-
-//handlebars
-var hbs = require('hbs');
-
-
-//CREATING PUBLIC/STATIC FOLDER AND PARTIAL FOLDERS
-hbs.registerPartials(__dirname + './../views/partials');
-app.set('view engine', 'hbs');
-
-
-
 // to use public folder
 app.use(express.static(publicPath));
+
+//CREATING PUBLIC/STATIC FOLDER AND PARTIAL FOLDERS
+app.set('view engine', 'hbs');
+hbs.registerPartials(__dirname + './../views/partials');
+
+
+
+
+
 
 //INDEX PAGE
 
