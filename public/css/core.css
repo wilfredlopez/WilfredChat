@@ -238,3 +238,9 @@ article li:last-child span.msgfrom {
 .sidebar h2{
     padding-top: 20px;
 }
+
+.about{
+    display: block;
+    margin: 5%;
+    padding: 5%;
+}

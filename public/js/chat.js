@@ -42,27 +42,18 @@ socket.on('connect', () =>{
 
             //scroll function.
             
-
-
-
-
-
         var $form = $('#message-form');
 
-        $form.on('submit', function(e){
-            e.preventDefault();
-            socket.emit('createMessage',{
-                from: 'User',
-                text: $('[name=message]').val()
-            }, function(){
-    
-            });
+    $form.on('submit', function(e){
+        e.preventDefault();
 
-            $('[name=message]').val("");
-           
+        socket.emit('createMessage',{
+            text: $('[name=message]').val()
+        }, function(){
 
-        
         });
+        $('[name=message]').val("");   
+    });
     
     var $locationButton = $('#send-location');
     

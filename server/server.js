@@ -76,19 +76,27 @@ hbs.registerHelper('createdAt',() =>{
 
        io.to(params.room).emit('updateUserList', users.getUserList(params.room));
         //greeting user
-        socket.emit('newMessage', generateMessage('Admin','Welcome to the Chat',tiempo));
+        var user = users.getUser(socket.id);
+        socket.emit('newMessage', generateMessage('Admin',`Welcome to the Chat ${user.name}`,tiempo));
         socket.broadcast.to(params.room).emit('newMessage',generateMessage('Admin',`${params.name} has joined`,tiempo));
         callback();
     });
 
     //listen to event
     socket.on('createMessage', (message, callback) =>{
-        io.emit('newMessage', generateMessage(message.from,message.text,tiempo));
+        var user = users.getUser(socket.id);
+       
+        if(user){
+        io.to(user.room).emit('newMessage', generateMessage(user.name,message.text,tiempo));
+        }
         callback('from server');
     });
 
     socket.on('createLocationMessage', (coords) =>{
-        io.emit('newLocationMessage', generateLocationMessage('User', coords.latitude, coords.longitude, tiempo));
+        var user = users.getUser(socket.id);
+        if(user){
+            io.to(user.room).emit('newLocationMessage', generateLocationMessage(user.name, coords.latitude, coords.longitude, tiempo));
+        }
     });
 
     socket.on('disconnect', () =>{

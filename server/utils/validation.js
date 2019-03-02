@@ -1,7 +1,7 @@
 var isRealString = (str) => {
 
 
-        return str !== "" || str ===undefined
+        return str === "" || str !==undefined
 
 };
 
