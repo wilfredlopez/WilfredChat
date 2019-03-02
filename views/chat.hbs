@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{> head }}
+
+</head>
+<body>
+<div class="container">
+    {{> header }}
+
+
+
+<main>
+    
+    <div class="sidebar">
+        <div class="sidehead">
+            <div class="mgtop5">
+            <h2 style="text-decoration: underline;">Users Online</h2>
+            </div>
+        </div>
+        <div class="users">
+            <ol id="users-list">
+            <li><p>test user</p></li>
+            <li><p>test user 2</p></li>
+            </ol>
+        </div>
+    </div>
+        <section class="chat-section">
+            <h1>Chat</h1>
+            <article class="message-article">
+            <ol class="messages">
+        
+
+            </ol>
+
+            </article>
+        <div class="chat-footer">
+        <form id="message-form">
+            <input name="message" type="text" value="" placeholder="type message here" class="value" autofocus autocomplete="off" title="This field should not be blank" required>
+            <button>Send</button>
+            
+        </form><button id="send-location" >Send Location</button>
+        
+        </div>
+</section>
+        <br>
+    <article>
+        
+    </article>
+
+
+</main><!--End Main-->
+{{> footer}}
+
+
+
+
+</div><!--End Container-->
+</body>
+</html>

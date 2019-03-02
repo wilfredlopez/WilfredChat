@@ -3,6 +3,9 @@ const express = require('express');
 const publicPath = path.join(__dirname, './../public'); //to use public path
 const {generateMessage, generateLocationMessage} = require('./utils/message');
 const moment = require('moment'); //to handle time forma and display
+const {isRealString} = require('./utils/validation');
+const {Users} = require('./utils/users');
+
 //handlebars
 var hbs = require('hbs');
 
@@ -12,6 +15,7 @@ const http = require('http');
 var app = express();
 var server = http.createServer(app);
 var io = socketIO(server);
+var users = new Users();
 
 // to use public folder
 app.use(express.static(publicPath));
@@ -19,14 +23,6 @@ app.use(express.static(publicPath));
 //CREATING PUBLIC/STATIC FOLDER AND PARTIAL FOLDERS
 app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/../views/partials');
-
-
-
-
-
-
-//INDEX PAGE
-
 
 
 app.get('/about', (req, res) =>{
@@ -41,9 +37,11 @@ app.get('/', (req, res) =>{
     }); //using hbs package
 });
 
-
-
-
+app.get('/chat', (req, res) =>{
+    res.render('chat.hbs',{
+        pageTitle: 'Home | Chat App',
+    }); //using hbs package
+});
 
 //PORT CONFIG
 server.listen(process.env.PORT || 3000, () =>{
@@ -52,13 +50,9 @@ server.listen(process.env.PORT || 3000, () =>{
 
 //helps cominication // listen and emitting events
 io.on('connection', (socket) =>{
-
     //tiempo = moment().format("MMM Do YYYY h:mm a z");
     tiempo = moment().format("h:mm a z"); //z is for the timezone
-
-    
-    //greeting user
-   socket.emit('newMessage', generateMessage('Admin','Welcome to the Chat',tiempo));
+ 
 
    hbs.registerHelper('from',() =>{
     return 'Admin'
@@ -70,11 +64,23 @@ hbs.registerHelper('createdAt',() =>{
     return tiempo
 });
  
-  
-       
+    socket.on('join', (params, callback) => {
+        if(!isRealString(params.name) || !isRealString(params.room)){     
+            return callback(`Name and Room are required: invalid: ${JSON.stringify(params.name)} / ${JSON.stringify(params.room)}`);
+        }
+          
+       socket.join(params.room); // to join that particular room
+       users.removeUser(socket.id);
+       users.addUser(socket.id, params.name, params.room);
 
-    socket.broadcast.emit('newMessage',generateMessage('Admin','New User joined',tiempo));
-    
+
+       io.to(params.room).emit('updateUserList', users.getUserList(params.room));
+        //greeting user
+        socket.emit('newMessage', generateMessage('Admin','Welcome to the Chat',tiempo));
+        socket.broadcast.to(params.room).emit('newMessage',generateMessage('Admin',`${params.name} has joined`,tiempo));
+        callback();
+    });
+
     //listen to event
     socket.on('createMessage', (message, callback) =>{
         io.emit('newMessage', generateMessage(message.from,message.text,tiempo));
@@ -84,6 +90,15 @@ hbs.registerHelper('createdAt',() =>{
     socket.on('createLocationMessage', (coords) =>{
         io.emit('newLocationMessage', generateLocationMessage('User', coords.latitude, coords.longitude, tiempo));
     });
+
+    socket.on('disconnect', () =>{
+        var user = users.removeUser(socket.id);
+         if(user){
+             io.to(user.room).emit('updateUserList', users.getUserList(user.room));
+             io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.name} has left`,tiempo));
+         }
+     });
+
 
 
 });//END CONNECTION

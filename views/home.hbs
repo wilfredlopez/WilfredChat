@@ -14,37 +14,64 @@
         <div class="users"></div>
     </div>
 -->
-<main>
-    <h1>Chat</h1>
-        <section class="chat-section">
-            <article class="message-article">
-            <ol class="messages">
-        
 
-            </ol>
-
-            </article>
-        <div class="chat-footer">
-        <form id="message-form">
-            <input name="message" type="text" value="" placeholder="type message here" class="value" autofocus autocomplete="off">
-            <button>Send</button>
-            
-        </form><button id="send-location" >Send Location</button>
-        
+<div class="centered-content">
+    <div class="userform">
+        <form action="/chat">
+        <div class="form-field">
+            <h1>Join a Chat</h1>
         </div>
-</section>
+        <div class="form-field">
+            <label>Display Name: </label>
+            <input type="text" name="name" autofocus required onkeyup="nospaces(this)"/>
+        </div>
+        <div class="form-field">
+                       <label>Room Name: </label>
+            <input type="text" name="room" autofocus required onkeyup="nospaces(this)"/>
+        </div>
+        <div class="form-field">
+            <button type="submit" id="join">Join</button>
+        </div>
+        </form>
+        <ul>
+        <h2>Available Rooms</h2>
+        <li>A</li>
+        <li>B</li>
+        </ul>
+
+    </div><!--end Userform -->
+</div> <!-- END Centered COntent-->
+
         <br>
     <article>
         
     </article>
 
 
-</main><!--End Main-->
-{{> footer}}
+
+
 
 
 
 
 </div><!--End Container-->
+
+    <script type="text/javascript">
+
+function nospaces(t){
+
+if(t.value.match(/\s/g)){
+
+alert('Sorry, you are not allowed to enter any spaces');
+
+t.value=t.value.replace(/\s/g,'');
+
+}
+
+}
+
+</script>
+
+
 </body>
 </html>

@@ -11,8 +11,6 @@ function scrollToBotton (){
     
     if(clientHeight + scrollTop + newMessageHeight + lastMessageHeight >= scrollHeight){
         messages.scrollTop(scrollHeight);
-    }else{
-        console.log('should NOT scroll');
     }
 };
 
@@ -21,6 +19,22 @@ var socket = io();
 socket.on('connect', () =>{
      console.log('connected to server');
 
+     var params = deparam(window.location.search); ///deparam is a custom function
+
+
+     var $join = $('#join');
+     
+        socket.emit('join', params, function (err) {
+                if(err){
+                        alert(err);
+                        window.location.href = '/'; //send user back to home
+                        
+                }else{
+                    
+                }
+        });
+ 
+  
     
 
     //handling event with query | getting data form Form
@@ -121,7 +135,6 @@ socket.on('connect', () =>{
     
 
 
-
     }); //END DOCUMENT.READY
 
 
@@ -130,6 +143,23 @@ socket.on('connect', () =>{
 
 socket.on('disconnect', ()=> {
  console.log('disconnected form server');
+});
+
+socket.on('updateUserList', function(users){
+    console.log('Users array', users);
+    //under div class users. have an ol li p
+   
+    var li = $('<li></li>'); 
+
+        users.forEach(element => {
+            li.append($('<li></li>').text(element));
+        });
+
+    $('#users-list').html(li);
+
+
+
+
 });
 
 
