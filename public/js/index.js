@@ -88,8 +88,13 @@ socket.on('disconnect', ()=> {
 socket.on('newMessage', function(message){
     console.log('New Message: ', message);
     
-    var li = $('<li aria-selected="true" role="tab" tabindex="0"></li>');
-    li.text(`${message.from}: ${message.text}`);
+   
+    var li = $('<li aria-selected="true" role="tab" tabindex="0" class="from"></li>');
+    var span = $('<span class="message"></span>');
+    span.text(`${message.text}`);
+    li.text(`${message.createdAt} ${message.from}: `);
+
+    li.append(span);
 
     $('.messages').append(li);
     li.focus();

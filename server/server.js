@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const publicPath = path.join(__dirname, './../public'); //to use public path
 const {generateMessage, generateLocationMessage} = require('./utils/message');
+const moment = require('moment');
 
 //setting Web Sockets
 const socketIO = require('socket.io');
@@ -50,15 +51,21 @@ server.listen(process.env.PORT || 3000, () =>{
 //helps cominication // listen and emitting events
 io.on('connection', (socket) =>{
 
-    //greeting user
-    socket.emit('newMessage', generateMessage('Admin','Welcome to the Chat'));
+    tiempo = moment().format("MMM Do YYYY h:mm a");
 
-    socket.broadcast.emit('newMessage',generateMessage('Admin','New User joined'));
+    
+    //greeting user
+    socket.emit('newMessage', generateMessage('Admin','Welcome to the Chat',tiempo));
+
+    //var hora = new Date().getTime().valueOf;
+    
+  
+
+    socket.broadcast.emit('newMessage',generateMessage('Admin','New User joined',tiempo));
     
     //listen to event
     socket.on('createMessage', (message, callback) =>{
-        console.log('message from brower received: ', message);
-        io.emit('newMessage', generateMessage(message.from,message.text));
+        io.emit('newMessage', generateMessage(message.from,message.text,tiempo));
         callback('from server');
     });
 
