@@ -18,7 +18,7 @@ app.use(express.static(publicPath));
 
 //CREATING PUBLIC/STATIC FOLDER AND PARTIAL FOLDERS
 app.set('view engine', 'hbs');
-hbs.registerPartials(__dirname + './../views/partials');
+hbs.registerPartials(__dirname + '/../views/partials');
 
 
 
