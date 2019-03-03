@@ -21,7 +21,6 @@ socket.on('connect', () =>{
 
      var params = deparam(window.location.search); ///deparam is a custom function
 
-
      var $join = $('#join');
      
         socket.emit('join', params, function (err) {
@@ -35,8 +34,6 @@ socket.on('connect', () =>{
         });
  
   
-    
-
     //handling event with query | getting data form Form
     $(document).ready(function(){
 
@@ -143,7 +140,7 @@ socket.on('updateUserList', function(users){
     var li = $('<li></li>'); 
 
         users.forEach(element => {
-            li.append($('<li></li>').text(element));
+            li.append($('<p></p>').text(element));
         });
 
     $('#users-list').html(li);

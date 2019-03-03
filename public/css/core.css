@@ -20,11 +20,16 @@ h1{
     font-weight: bolder;
     font-size: 20px;
 }
+
+h2{
+    font-size: 17px;
+    font-weight: bold;
+}
 body{
     width: 100%;
     margin: 0;
     padding: 0;
-    min-width: 324px;
+    min-width: 329px;
 }
 
 
@@ -55,6 +60,8 @@ header{
 }
 #send-location{
     display: inline;
+    position: relative;
+    font-weight: bolder;
 }
 .sidehead h2{
     font-weight: bolder;
@@ -89,6 +96,7 @@ nav ul li{
     border: .5px solid #b4b4b4;
     box-shadow: 1px #f6f6f6;
     background-color:#0062b2;
+    border-radius: 8px;
     
 }
 
@@ -143,9 +151,10 @@ article li:last-child{
 form button {
     display: inline;
     position: relative;
+    font-weight: bolder;
 }
 .chat-footer{
-    background-color: rgb(156, 156, 156);
+    background-color: rgba(43, 49, 49, 0.8);
     margin: 20px 0;
 }
 
@@ -204,8 +213,10 @@ article li:last-child span.msgfrom {
         }
 
         .sidebar{
-        min-width: 100%;
-        display: table;
+            min-width: 100%;
+            display: table;
+            position: absolute;
+            bottom: -110px;
         }
 }
 
@@ -223,6 +234,8 @@ article li:last-child span.msgfrom {
     background: rgba(5, 98, 178, 0.6);
     margin: auto;
     padding: 3%;
+    border-radius: 27px;
+    border: 2px solid #ffffff;
 }
 
 .form-field {
@@ -244,3 +257,39 @@ article li:last-child span.msgfrom {
     margin: 5%;
     padding: 5%;
 }
+
+#users-list li p {
+    background: rgb(255, 255, 255);
+    margin-right: 40%;
+    color: black;
+    font-weight: 900;
+    text-align: center;
+    overflow: hidden;
+    box-shadow: 2px 2px rgba(11, 6, 9, 0.5);
+}
+
+.form-field label {
+    font-weight: 800;
+    font-variant: petite-caps;
+    font-size: 17px;
+}
+
+.form-field span {
+    color: aliceblue;
+    font-weight: 600;
+    font-variant: petite-caps;
+    font-size: 16px;
+}
+
+input[type="text"]:focus {
+    border: 3px rgba(2, 178, 132, 0.9) solid;
+ 
+}
+
+.from:nth-last-child(-n+2) span {
+    color: black;
+}
+.from:nth-last-child(-n+2) div{
+    font-weight: 600;
+}
+

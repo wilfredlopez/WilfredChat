@@ -5,7 +5,7 @@ const {generateMessage, generateLocationMessage} = require('./utils/message');
 const moment = require('moment'); //to handle time forma and display
 const {isRealString} = require('./utils/validation');
 const {Users} = require('./utils/users');
-
+    
 //handlebars
 var hbs = require('hbs');
 
@@ -69,16 +69,17 @@ hbs.registerHelper('createdAt',() =>{
             return callback(`Name and Room are required: invalid: ${JSON.stringify(params.name)} / ${JSON.stringify(params.room)}`);
         }
           
-       socket.join(params.room); // to join that particular room
+        
+       socket.join(params.room.toUpperCase()); // to join that particular room
        users.removeUser(socket.id);
-       users.addUser(socket.id, params.name, params.room);
+       users.addUser(socket.id, params.name, params.room.toUpperCase());
 
 
-       io.to(params.room).emit('updateUserList', users.getUserList(params.room));
+       io.to(params.room.toUpperCase()).emit('updateUserList', users.getUserList(params.room.toUpperCase()));
         //greeting user
         var user = users.getUser(socket.id);
-        socket.emit('newMessage', generateMessage('Admin',`Welcome to the Chat ${user.name}`,tiempo));
-        socket.broadcast.to(params.room).emit('newMessage',generateMessage('Admin',`${params.name} has joined`,tiempo));
+        socket.emit('newMessage', generateMessage('Admin',`Welcome to the chat ${user.name}`,`${tiempo}:`));
+        socket.broadcast.to(params.room.toUpperCase()).emit('newMessage',generateMessage('Admin',`${params.name} has joined`,`${tiempo}:`));
         callback();
     });
 
@@ -87,7 +88,7 @@ hbs.registerHelper('createdAt',() =>{
         var user = users.getUser(socket.id);
        
         if(user){
-        io.to(user.room).emit('newMessage', generateMessage(user.name,message.text,tiempo));
+        io.to(user.room.toUpperCase()).emit('newMessage', generateMessage(user.name,message.text,`${tiempo}:`));
         }
         callback('from server');
     });
@@ -95,15 +96,15 @@ hbs.registerHelper('createdAt',() =>{
     socket.on('createLocationMessage', (coords) =>{
         var user = users.getUser(socket.id);
         if(user){
-            io.to(user.room).emit('newLocationMessage', generateLocationMessage(user.name, coords.latitude, coords.longitude, tiempo));
+            io.to(user.room.toUpperCase()).emit('newLocationMessage', generateLocationMessage(user.name, coords.latitude, coords.longitude, `${tiempo}:`));
         }
     });
 
     socket.on('disconnect', () =>{
         var user = users.removeUser(socket.id);
          if(user){
-             io.to(user.room).emit('updateUserList', users.getUserList(user.room));
-             io.to(user.room).emit('newMessage', generateMessage('Admin', `${user.name} has left`,tiempo));
+             io.to(user.room.toUpperCase()).emit('updateUserList', users.getUserList(user.room.toUpperCase()));
+             io.to(user.room.toUpperCase()).emit('newMessage', generateMessage('Admin', `${user.name} has left`,`${tiempo}:`));
          }
      });
 

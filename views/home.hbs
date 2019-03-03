@@ -23,21 +23,20 @@
         </div>
         <div class="form-field">
             <label>Display Name: </label>
-            <input type="text" name="name" autofocus required onkeyup="nospaces(this)"/>
+            <input type="text" name="name" autofocus required pattern="\S+" title="-Blank spaces are not allowed"/>
         </div>
         <div class="form-field">
                        <label>Room Name: </label>
-            <input type="text" name="room" autofocus required onkeyup="nospaces(this)"/>
+            <input type="text" name="room" autofocus required pattern="\S+" title="-Blank spaces are not allowed"/>
         </div>
         <div class="form-field">
-            <button type="submit" id="join">Join</button>
+            <button type="submit" id="join">Join</button><br>
+            <span role="contentinfo" aria-label="requirements: -No blank spaces allowed">
+                Requirements:<br>
+                -No blank spaces allowed.</span>
         </div>
         </form>
-        <ul>
-        <h2>Available Rooms</h2>
-        <li>A</li>
-        <li>B</li>
-        </ul>
+
 
     </div><!--end Userform -->
 </div> <!-- END Centered COntent-->
@@ -55,23 +54,5 @@
 
 
 </div><!--End Container-->
-
-    <script type="text/javascript">
-
-function nospaces(t){
-
-if(t.value.match(/\s/g)){
-
-alert('Sorry, you are not allowed to enter any spaces');
-
-t.value=t.value.replace(/\s/g,'');
-
-}
-
-}
-
-</script>
-
-
 </body>
 </html>
