@@ -8,6 +8,7 @@
                 if (event.keyCode == 13){
                     event.preventDefault();
                     $btnSend.submit();
+                  
                 }
                     
             });
@@ -61,13 +62,16 @@ socket.on('connect', () =>{
 
     $form.on('submit', function(e){
         e.preventDefault();
-
+      
         socket.emit('createMessage',{
             text: $('[name=message]').val()
         }, function(){
 
         });
+
         $('[name=message]').val("");   
+        $(window).scrollTop(0);
+        console.log('should scrool');
     });
     
     var $locationButton = $('#send-location');
