@@ -70,7 +70,7 @@ socket.on('connect', () =>{
         });
 
         $('[name=message]').val("");   
-        $(window).scrollTop(0);
+        $(window).scrollTop(100);
         console.log('should scrool');
     });
     
