@@ -222,12 +222,12 @@ article li:last-child span.msgfrom {
 
         .sidebar{
             min-width: 100%;
-            /* display: table; */
+            display: table;
             position: absolute;
             bottom: -175px;
             top: 100%;
             margin: 0;
-            display: none;
+            /* display: none;   */
         }
         .sidebar h2 {
                 padding-top: 20px;
@@ -235,7 +235,12 @@ article li:last-child span.msgfrom {
             }
             nav ul{
                 text-align: center;
-    padding: 0;
+                padding: 0;
+            }
+            #users-list li p {
+               
+                margin-right: 30%;
+                margin-left: 30%;
             }
 }
 
