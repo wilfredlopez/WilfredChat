@@ -136,7 +136,7 @@ article li{
 }
 
 .message {
-    color: gray;
+    color: black;
 }
 
 article li:last-child .message {
@@ -178,7 +178,7 @@ footer{
 
 .message-article span {
     display: inline;
-    color: lightslategray;
+    color: #000000;
 }
 
 .message-article h4 {
@@ -291,6 +291,7 @@ input[type="text"]:focus {
 }
 .from:nth-last-child(-n+2) div{
     font-weight: 600;
+    color: #6f6800;
 }
 
 span.room {
