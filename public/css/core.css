@@ -216,12 +216,12 @@ article li:last-child span.msgfrom {
             min-width: 100%;
             display: table;
             position: absolute;
-            bottom: -110px;
+            bottom: -175px;
         }
 }
 
 .centered-content {
-    margin: 15% 2%;
+    margin: 20% 2%;
   
 }
 
@@ -254,8 +254,8 @@ article li:last-child span.msgfrom {
 
 .about{
     display: block;
-    margin: 5%;
-    padding: 5%;
+    margin: 6%;
+    padding: 6%;
 }
 
 #users-list li p {
@@ -291,5 +291,13 @@ input[type="text"]:focus {
 }
 .from:nth-last-child(-n+2) div{
     font-weight: 600;
+}
+
+span.room {
+    /* border: 4px dashed white; */
+    /* box-shadow: -6px 0px #b0b5b5; */
+    text-decoration: underline;
+    text-shadow: 1px 1px black;
+    padding: 0 16%;
 }
 

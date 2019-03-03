@@ -139,13 +139,20 @@ socket.on('updateUserList', function(users){
    
     var li = $('<li></li>'); 
 
-        users.forEach(element => {
+        users[0].forEach(element => {
             li.append($('<p></p>').text(element));
         });
 
     $('#users-list').html(li);
 
+//room name
 
+let room = $('<h2>Room Name: </h2>');
+let roomtitle = $('<span class="room"></span');
+roomtitle.text(`${users[1]}`);
+room.append(roomtitle);
+
+$('#roomName').html(room);
 
 
 });

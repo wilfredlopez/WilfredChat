@@ -5,7 +5,7 @@ const {generateMessage, generateLocationMessage} = require('./utils/message');
 const moment = require('moment'); //to handle time forma and display
 const {isRealString} = require('./utils/validation');
 const {Users} = require('./utils/users');
-    
+
 //handlebars
 var hbs = require('hbs');
 
@@ -75,11 +75,12 @@ hbs.registerHelper('createdAt',() =>{
        users.addUser(socket.id, params.name, params.room.toUpperCase());
 
 
-       io.to(params.room.toUpperCase()).emit('updateUserList', users.getUserList(params.room.toUpperCase()));
+       io.to(params.room.toUpperCase()).emit('updateUserList', [users.getUserList(params.room.toUpperCase()),params.room]);
         //greeting user
         var user = users.getUser(socket.id);
         socket.emit('newMessage', generateMessage('Admin',`Welcome to the chat ${user.name}`,`${tiempo}:`));
         socket.broadcast.to(params.room.toUpperCase()).emit('newMessage',generateMessage('Admin',`${params.name} has joined`,`${tiempo}:`));
+        
         callback();
     });
 
