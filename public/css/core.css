@@ -319,3 +319,8 @@ span.room {
     padding: 0 16%;
 }
 
+.info {
+    color: #edd8d8 !important;
+    font-variant: common-ligatures !important;
+    font-size: 0.8em !important;
+}

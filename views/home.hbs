@@ -23,17 +23,16 @@
         </div>
         <div class="form-field">
             <label>Display Name: </label>
-            <input type="text" name="name" autofocus required pattern="\S+" title="-Blank spaces are not allowed"/>
+            <input type="text" name="name" required pattern="\S+" title="-Blank spaces are not allowed"/>
+         
         </div>
         <div class="form-field">
                        <label>Room Name: </label>
-            <input type="text" name="room" autofocus required pattern="\S+" title="-Blank spaces are not allowed"/>
+            <input type="text" name="room" required pattern="\S+" title="-Blank spaces are not allowed"/>
+           
         </div>
         <div class="form-field">
             <button type="submit" id="join">Join</button><br>
-            <span role="contentinfo" aria-label="requirements: -No blank spaces allowed">
-                Requirements:<br>
-                -No blank spaces allowed.</span>
         </div>
         </form>
 
@@ -51,7 +50,37 @@
 
 
 
+ <script src="/js/libs/jquery-3.3.1.min.js"></script>
 
+ <script>
+    $(document).ready(function(){
+        
+
+        let $inputname = $("input");
+  
+        $inputname.on('focus',function(){
+            var nombre = this.name
+              informacion(nombre);
+        });
+        
+        $inputname.on('blur',function(){
+            let info = $('.info');
+            info.html("");
+        });
+
+
+        function informacion(nombre){
+            var n = "input[name="+nombre+"]";
+            $('<div class="info" role="contentinfo" aria-label="blank spaces are not allowed">Blank spaces are not allowed</div>' ).insertBefore( $(n));
+        }
+        $("input[name='name']").focus();
+    });
+ 
+
+
+
+
+ </script>
 
 </div><!--End Container-->
 </body>

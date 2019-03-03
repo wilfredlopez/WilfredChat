@@ -134,7 +134,7 @@ socket.on('disconnect', ()=> {
 });
 
 socket.on('updateUserList', function(users){
-    console.log('Users array', users);
+   // console.log('Users array', users);
     //under div class users. have an ol li p
    
     var li = $('<li></li>'); 
