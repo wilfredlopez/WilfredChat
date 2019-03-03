@@ -220,11 +220,12 @@ article li:last-child span.msgfrom {
 
         .sidebar{
             min-width: 100%;
-            display: table;
+            /* display: table; */
             position: absolute;
             bottom: -175px;
             top: 100%;
             margin: 0;
+            display: none;
         }
         .sidebar h2 {
                 padding-top: 20px;
