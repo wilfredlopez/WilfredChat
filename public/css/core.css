@@ -61,7 +61,9 @@ header{
 #send-location{
     display: inline;
     position: relative;
-    font-weight: bolder;
+    font-weight: 700;
+    border: 2px solid #ffffff;
+    border-radius: 22px 22px;
 }
 .sidehead h2{
     font-weight: bolder;
@@ -137,6 +139,8 @@ article li{
 
 .message {
     color: black;
+    display: inline;
+    padding-left: 9px;
 }
 
 article li:last-child .message {
@@ -152,6 +156,8 @@ form button {
     display: inline;
     position: relative;
     font-weight: bolder;
+    border-radius: 10px 10px;
+    border: 2px solid white;
 }
 .chat-footer{
     background-color: rgba(43, 49, 49, 0.8);
@@ -217,7 +223,17 @@ article li:last-child span.msgfrom {
             display: table;
             position: absolute;
             bottom: -175px;
+            top: 100%;
+            margin: 0;
         }
+        .sidebar h2 {
+                padding-top: 20px;
+                font-size: .8em;
+            }
+            nav ul{
+                text-align: center;
+    padding: 0;
+            }
 }
 
 .centered-content {
@@ -231,7 +247,8 @@ article li:last-child span.msgfrom {
     flex: 1 1 50%;
     flex-grow: initial;
     -webkit-box-flex: 1 1 38%;
-    background: rgba(5, 98, 178, 0.6);
+    background: rgba(0, 98, 178, 0.81);
+    color: white;
     margin: auto;
     padding: 3%;
     border-radius: 27px;
