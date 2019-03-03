@@ -64,6 +64,7 @@ header{
     font-weight: 700;
     border: 2px solid #ffffff;
     border-radius: 22px 22px;
+    background: white;
 }
 .sidehead h2{
     font-weight: bolder;
@@ -157,6 +158,7 @@ form button {
     position: relative;
     font-weight: bolder;
     border-radius: 10px 10px;
+    background: white;
     border: 2px solid white;
 }
 .chat-footer{

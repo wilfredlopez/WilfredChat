@@ -1,3 +1,19 @@
+        //if user press enter on keyboard to submit form
+        $msgInput = $(".value");
+        $btnSend = $('#btn-send');
+
+
+        $("input").keypress(function(event) {
+                //handle if user press enter
+                if (event.keyCode == 13){
+                    event.preventDefault();
+                    $btnSend.submit();
+                }
+                    
+            });
+
+
+
 function scrollToBotton (){
     //selectors
     var messages = $('.messages');
@@ -38,6 +54,8 @@ socket.on('connect', () =>{
     $(document).ready(function(){
 
             //scroll function.
+
+
             
         var $form = $('#message-form');
 
@@ -74,6 +92,8 @@ socket.on('connect', () =>{
             $locationButton.attr('disabled', 'disabled');
             alert('unable to fech location');
         });
+
+
 
 
     });
